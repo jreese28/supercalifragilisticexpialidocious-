@@ -1,0 +1,167 @@
+public class IntegerSet {
+	// Hint: probably best to use an array list.  You will need to do a little research
+    private List<Integer> set = new ArrayList<Integer>();
+    
+    /*public IntegerSet(ArrayList list){
+        this.list = list;
+    }
+*/
+	// Clears the internal representation of the set
+public void clear(){
+    list.clear();
+};
+
+// Returns the length of the set
+public int length(){
+    return list.size();
+}; // returns the length
+
+/*
+* Returns true if the 2 sets are equal, false otherwise;
+ * Two sets are equal if they contain all of the same values in ANY order.
+*/
+public boolean equals(IntegerSet b){
+    ArrayList<Integer>list2 = b.list;
+
+    if(list.size() != list2.size()){
+        return false;
+    }
+
+    ArrayList<Integer> temp1 = list;
+    ArrayList<Integer> temp2 = list2;
+
+    Collections.sort(temp1);
+    Collections.sort(temp2);
+
+    for(int i = 0; i < temp1.size(); i++){
+        if(temp1.get(i) != temp2.get(i)){
+            return false;
+        }
+    }
+    return true;
+
+}; 
+
+// Returns true if the set contains the value, otherwise false
+public boolean contains(int value) {
+
+    return true;
+    
+};    
+
+// Returns the largest item in the set; Throws a IntegerSetException if the set is empty 
+public int largest() throws IntegerSetException{
+    if(list.size() == 0){
+        IntegerSetException x = new IntegerSetException();
+        throw x;
+    }
+
+    int max = 0;
+
+    for(int i = 0; i < list.size(); i++){
+        if(list.get(i) > max){
+            max = list.get(i);
+        }
+    }
+    return max;
+}; 
+
+// Returns the smallest item in the set; Throws a IntegerSetException if the set is empty
+public int smallest() throws IntegerSetException{
+    if(list.size() == 0){
+        IntegerSetException x = new IntegerSetException();
+        throw x;
+    }
+
+    int min = Integer.MAX_VALUE;
+
+    for(int i = 0; i < list.size(); i++){
+        if(list.get(i) < min){
+            min = list.get(i);
+        }
+    }
+
+    return min;
+}
+
+// Adds an item to the set or does nothing it already there	
+public void add(int item){
+    boolean exist = false;
+
+    for(int i = 0; i < list.size(); i++){
+        if(list.get(i) == item){
+            exist = true;
+        }
+    }
+    if(exist == false){
+        list.add(item);
+    }
+}; // adds item to s or does nothing if it is in set
+
+// Removes an item from the set or does nothing if not there
+public void remove(int item){
+    for(int i = 0; i < list.size(); i++){
+        if(list.get(i) == item){
+            list.remove(i);
+        }
+    }
+}; 
+
+// Set union
+public static void union(IntegerSet intSetb) {
+    ArrayList<Integer> temp = intSetb.getlist();
+
+    Set<Integer> set = new HashSet<>();
+    set.addAll(list);
+    set.addAll(temp);
+
+    ArrayList<Integer> intSetc = new ArrayList<>(set);
+
+    IntgerSet intSetd = new IntegerSet(intSetc);
+
+    return intSetd;
+};
+
+// Set intersection
+public static intSet intersect(IntegerSet intSetb) {
+    ArrayList<Integer>temp = intSetb.getlist();
+
+    list.retainAll(temp);
+
+    IntegerSet intSetd = new IntegerSet(list);
+
+    return intSetd;
+
+}; 
+
+// Set difference, i.e., s1 –s2
+public static intSet diff(IntegerSet intSetb){
+    ArrayList<Integer>temp = intSetb.getlist();
+
+    list.removeAll(temp);
+
+    intSetd = new IntegerSet(list);
+
+    return intSetd;
+}; // set difference, i.e. s1 - s2
+
+// Returns true if the set is empty, false otherwise
+boolean isEmpty(IntegerSet intSetb){
+    
+    return true;
+};
+
+// Return String representation of your set
+public String toString() {
+    boolean isEmpty = true;
+    StringBuilder string = new StringBuilder();
+    string.append("{");
+    for(int i = 0, i < max; i++){
+        if(ArrayList[i]){
+            isEmpty = false;
+            string.append(i).append('');
+        }
+    }
+    return isEmpty ? "   " : string.append('}').toString();
+};	// return String representation of your set
+}
